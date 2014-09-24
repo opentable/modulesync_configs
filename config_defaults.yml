@@ -1,24 +1,70 @@
 ---
 .travis.yml:
-  script: "\"bundle exec rake validate && bundle exec rake lint && bundle exec rake spec SPEC_OPTS='--format documentation'\""
+  script: "bundle exec rake test"
   includes:
   - rvm: 1.8.7
-    env: PUPPET_GEM_VERSION="~> 3.0"
+    env: PUPPET_GEM_VERSION="2.7.16"
   - rvm: 1.9.3
-    env: PUPPET_GEM_VERSION="~> 3.0"
+    env: PUPPET_GEM_VERSION="2.7.16"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="3.0.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.0.0"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="3.1.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.1.0"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="3.2.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.2.0"
   - rvm: 2.0.0
-    env: PUPPET_GEM_VERSION="~> 3.0"
+    env: PUPPET_GEM_VERSION="3.2.0"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="3.3.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.3.0"
+  - rvm: 2.0.0
+    env: PUPPET_GEM_VERSION="3.3.0"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="3.4.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.4.0"
+  - rvm: 2.0.0
+    env: PUPPET_GEM_VERSION="3.4.0"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="3.5.1"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.5.1"
+  - rvm: 2.0.0
+    env: PUPPET_GEM_VERSION="3.5.1"
+  - rvm: 1.8.7
+    evn: PUPPET_GEM_VERSION="3.6.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="3.6.0"
+  - rvm: 2.0.0
+    env: PUPPET_GEM_VERSION="3.6.0"
 Gemfile:
   required:
   - gem: rake
-  - gem: rspec-puppet
-  - gem: puppetlabs_spec_helper
-  - gem: serverspec
   - gem: puppet-lint
+  - gem: rspec-puppet,
+    version:
+      git: 'https://github.com/rodjek/rspec-puppet.git'
+  - gem: puppet-syntax
+  - gem: puppetlabs_spec_helper
+  - gem: rspec
   - gem: beaker
   - gem: beaker-rspec
-  - gem: pry
-  - gem: simplecov
+  - gem: serverspec
+  - gem: specinfra
+  - gem: winrm
+  - gem: travis
+  - gem: travis-lint
+  - gem: vagrant-wrapper
+  - gem: puppet-blacksmith
+  - gem: guard-rake
+ 
 Rakefile:
   default_disabled_lint_checks:
   - 'disable_80chars'
@@ -26,3 +72,35 @@ Rakefile:
   - 'disable_class_parameter_defaults'
   - 'disable_documentation'
   - 'disable_single_quote_string_with_variables'
+.gitignore:
+  paths:
+    - '*.iml'
+    - '.idea/'
+
+LICENSE:
+  text: |
+    Copyright (c) 2013 OpenTable, Inc.
+
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+spec/spec_helper_acceptance.rb:
+  windows: false
+  dependencies:
+    - puppetlabs-stdlib
