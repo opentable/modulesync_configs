@@ -1,9 +1,22 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
+ENV['RUBY_VERSION'] = `ruby -v`
+
 group :development, :test do
+
+  if ENV['RUBY_VERSION'] =~ /1.8/
+    gem 'rest-client', '1.6.8'
+    gem 'gssapi', '1.2.0'
+    gem 'celluloid', '0.11.1'
+  end
+
+  if ENV['PUPPET_GEM_VERSION'] =~ /3.4/ && ENV['RUBY_VERSION'] !~ /1.8/
+    gem 'puppet-doc-lint', :require => false
+  end
+
 <% gems = @configs['required'] + (@configs['optional'] || []) -%>
 <% maxlen = gems.map! {|gem| { 'gem' => gem['gem'], 'version' => gem['version'], 'length' => gem['gem'].length + (("', '".length if gem['version']) || 0) + gem['version'].to_s.length } }.map{|gem| gem['length']}.max -%>
-<% gems.each do |gem| 
+<% gems.each do |gem|
     if gem['version'].instance_of?(Hash) -%>
   gem '<%= gem['gem'].chomp(',') %>',
     :git => '<%= gem['version']['git'] -%>',
@@ -11,8 +24,8 @@ group :development, :test do
     :require => false
 <% else -%>
   gem '<%= gem['gem'] %>'<%= ", '#{gem['version']}'" if gem['version'] %>, <%= ' ' * (maxlen - gem['length']) %> :require => false
-<%  end 
-  end	
+<%  end
+  end
 -%>
 end
 

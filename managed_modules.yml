@@ -1,2 +1,4 @@
 ---
+- puppet-download_file
 - puppet-windowsfeature
+- puppet-aws_powershell

@@ -3,18 +3,22 @@ language: ruby
 bundler_args: --without development
 before_install: rm Gemfile.lock || true
 script: <%= @configs['script'] %>
+rvm:
+<% @configs['rvm'].each do |rvm| -%>
+  - <%= rvm %>
+<% end -%>
+env:
+<% @configs['env'].each do |env| -%>
+  - <%= env %>
+<% end -%>
+
 matrix:
   fast_finish: true
-  include:
-<% @configs['includes'].each do |include| -%>
-  - rvm: <%= include['rvm'] %>
-    env: <%= include['env'] %>
+  exclude:
+<% @configs['exclude'].each do |exc| -%>
+    - rvm: <%= exc['rvm'] %>
+      env: <%= exc['env'] %>
 <% end -%>
-<% if @configs['extras'] -%>
-<%   @configs['extras'].each do |extra| -%>
-  - rvm: <%= extra['rvm'] %>
-    env: <%= extra['env'] %>
-<%   end -%>
-<% end -%>
+
 notifications:
   email: false
