@@ -14,10 +14,12 @@ env:
 
 matrix:
   fast_finish: true
+<% if @configs['exclude'] != nil -%>
   exclude:
 <% @configs['exclude'].each do |exc| -%>
     - rvm: <%= exc['rvm'] %>
       env: <%= exc['env'] %>
+<% end -%>
 <% end -%>
 
 notifications:

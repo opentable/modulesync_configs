@@ -1,4 +1,9 @@
 ---
-- puppet-download_file
-- puppet-windowsfeature
 - puppet-aws_powershell
+- puppet-download_file
+- puppet-homes
+- puppet-iis_rewrite
+- puppet-jenkins_job_builder
+- puppet-kafka
+- puppet-logstash_kafka
+- puppet-windowsfeature
