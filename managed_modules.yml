@@ -1,9 +1,20 @@
 ---
+- puppet-altlib
 - puppet-aws_powershell
 - puppet-download_file
+- puppet-graphite_powershell
 - puppet-homes
+- puppet-iis
 - puppet-iis_rewrite
 - puppet-jenkins_job_builder
 - puppet-kafka
 - puppet-logstash_kafka
+- puppet-nagdash
+- puppet-nsclient
+- puppet-nssm
+- puppet-puppetdb_rundeck
+- puppet-puppetversion
+- puppet-remaster
+- puppet-rundeck
+- puppet-sslcert
 - puppet-windowsfeature
